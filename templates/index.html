@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titulo %}Início - Controle de Equipamentos{% endblock %}
+{% block conteudo %}
+<section class="titulo-pagina">
+    <h1>Controle de Equipamentos de TI</h1>
+    <p>Acompanhe os equipamentos disponíveis e os empréstimos realizados pela equipe de TI.</p>
+</section>
+<section class="cards">
+    <article class="card"><strong>{{ total }}</strong><span>Equipamentos cadastrados</span></article>
+    <article class="card verde"><strong>{{ disponiveis }}</strong><span>Equipamentos disponíveis</span></article>
+    <article class="card amarelo"><strong>{{ emprestados }}</strong><span>Equipamentos emprestados</span></article>
+</section>
+<section class="atalhos">
+    <a class="botao" href="{{ url_for('equipamento') }}">Cadastrar equipamento</a>
+    <a class="botao" href="{{ url_for('colaborador') }}">Cadastrar colaborador</a>
+    <a class="botao" href="{{ url_for('emprestimo') }}">Registrar empréstimo</a>
+</section>
+<section class="secao-tabela">
+    <h2>Empréstimos recentes</h2>
+    <div class="tabela-responsiva"><table>
+        <thead><tr><th>Equipamento</th><th>Colaborador</th><th>Data</th><th>Situação</th></tr></thead>
+        <tbody>
+        {% for item in recentes %}
+            <tr><td>{{ item.tipo }} {{ item.marca }} {{ item.modelo }}</td><td>{{ item.colaborador }}</td>
+                <td>{{ item.data_emprestimo }}</td><td><span class="{{ 'status-emprestado' if item.status == 'Em aberto' else 'status-disponivel' }}">{{ item.status }}</span></td></tr>
+        {% else %}<tr><td colspan="4" class="vazio">Nenhum empréstimo registrado.</td></tr>{% endfor %}
+        </tbody>
+    </table></div>
+</section>
+{% endblock %}

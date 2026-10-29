@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}InfraLog{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <a href="{{ url_for('inicio') }}" class="logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo InfraLog"
+             onerror="this.style.display='none';document.querySelector('.logo-texto').style.display='block'">
+        <span class="logo-texto">InfraLog</span>
+    </a>
+    <nav>
+        <a href="{{ url_for('inicio') }}">Início</a>
+        <a href="{{ url_for('listar_equipamentos') }}">Equipamentos</a>
+        <a href="{{ url_for('listar_colaboradores') }}">Colaboradores</a>
+        <a href="{{ url_for('listar_emprestimos') }}">Empréstimos</a>
+    </nav>
+</header>
+<main class="container">
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensagem in mensagens %}
+            <div class="alerta {{ categoria }}">{{ mensagem }}</div>
+        {% endfor %}
+    {% endwith %}
+    {% block conteudo %}{% endblock %}
+</main>
+<footer>Sistema de Controle de Empréstimo de Equipamentos de TI</footer>
+</body>
+</html>

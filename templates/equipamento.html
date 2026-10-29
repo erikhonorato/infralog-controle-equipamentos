@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titulo %}Cadastro de Equipamento{% endblock %}
+{% block conteudo %}
+<section class="titulo-pagina"><h1>Cadastro de Equipamento</h1><p>Preencha as informações do equipamento que será controlado pela equipe de TI.</p></section>
+<form class="formulario" method="post">
+<div class="grade-formulario">
+<div class="campo"><label for="tipo">Tipo do equipamento <span class="obrigatorio">*</span></label>
+<select id="tipo" name="tipo" required><option value="">Selecione</option>{% for item in ['Notebook','Desktop','Monitor','Mouse','Teclado','Headset'] %}<option value="{{ item }}" {% if dados.get('tipo')==item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+<div class="campo"><label for="marca">Marca <span class="obrigatorio">*</span></label><input type="text" id="marca" name="marca" placeholder="Exemplo: Dell" value="{{ dados.get('marca','') }}" required></div>
+<div class="campo"><label for="modelo">Modelo <span class="obrigatorio">*</span></label><input type="text" id="modelo" name="modelo" placeholder="Exemplo: Latitude 5420" value="{{ dados.get('modelo','') }}" required></div>
+<div class="campo"><label for="numero_serie">Número de série <span class="obrigatorio">*</span></label><input type="text" id="numero_serie" name="numero_serie" placeholder="Exemplo: SN-DELL-001" value="{{ dados.get('numero_serie','') }}" required></div>
+<div class="campo"><label for="hostname">Hostname</label><input type="text" id="hostname" name="hostname" placeholder="Exemplo: NB-TI-001" value="{{ dados.get('hostname','') }}"></div>
+<div class="campo"><label for="situacao">Situação</label><input value="Disponível" disabled></div>
+<div class="campo campo-completo"><label for="observacao">Observações</label><textarea id="observacao" name="observacao" placeholder="Digite informações adicionais sobre o equipamento">{{ dados.get('observacao','') }}</textarea></div>
+</div>
+<div class="grupo-botoes"><button class="botao" type="submit">Salvar equipamento</button><button class="botao botao-amarelo" type="reset">Limpar</button><a class="botao botao-vermelho" href="{{ url_for('inicio') }}">Cancelar</a></div>
+</form>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block titulo %}Colaboradores{% endblock %}{% block conteudo %}
+<div class="linha-titulo"><section class="titulo-pagina"><h1>Colaboradores cadastrados</h1><p>Consulte as pessoas que podem receber equipamentos.</p></section><a class="botao" href="{{ url_for('colaborador') }}">Cadastrar colaborador</a></div>
+<section class="secao-tabela"><div class="tabela-responsiva"><table><thead><tr><th>ID</th><th>Nome</th><th>Setor</th><th>Cargo</th></tr></thead><tbody>{% for c in colaboradores %}<tr><td>{{ c.id_colaborador }}</td><td>{{ c.nome }}</td><td>{{ c.setor }}</td><td>{{ c.cargo }}</td></tr>{% else %}<tr><td colspan="4" class="vazio">Nenhum colaborador cadastrado.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

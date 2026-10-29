@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block titulo %}Registro de Empréstimo{% endblock %}
+{% block conteudo %}
+<section class="titulo-pagina"><h1>Registro de Empréstimo</h1><p>Selecione o colaborador e o equipamento que será entregue.</p></section>
+<form class="formulario" method="post">
+<div class="grade-formulario">
+<div class="campo campo-completo"><label for="id_colaborador">Colaborador <span class="obrigatorio">*</span></label><select id="id_colaborador" name="id_colaborador" required><option value="">Selecione o colaborador</option>{% for c in colaboradores %}<option value="{{ c.id_colaborador }}">{{ c.nome }} - {{ c.setor }}</option>{% endfor %}</select></div>
+<div class="campo campo-completo"><label for="id_equipamento">Equipamento disponível <span class="obrigatorio">*</span></label><select id="id_equipamento" name="id_equipamento" required><option value="">Selecione o equipamento</option>{% for e in equipamentos %}<option value="{{ e.id_equipamento }}">{{ e.tipo }} {{ e.marca }} {{ e.modelo }} - {{ e.numero_serie }}</option>{% endfor %}</select></div>
+<div class="campo"><label for="data_emprestimo">Data do empréstimo <span class="obrigatorio">*</span></label><input type="date" id="data_emprestimo" name="data_emprestimo" value="{{ hoje }}" required></div>
+<div class="campo"><label for="data_prevista_devolucao">Data prevista para devolução</label><input type="date" id="data_prevista_devolucao" name="data_prevista_devolucao"></div>
+<div class="campo campo-completo"><label for="observacao">Observações</label><textarea id="observacao" name="observacao" placeholder="Digite informações adicionais sobre o empréstimo"></textarea></div>
+</div>
+<div class="aviso">Somente equipamentos com a situação “Disponível” podem ser selecionados. Após o registro, o equipamento ficará com a situação “Emprestado”.</div>
+<div class="grupo-botoes"><button class="botao" type="submit">Registrar empréstimo</button><button class="botao botao-amarelo" type="reset">Limpar</button><a class="botao botao-vermelho" href="{{ url_for('inicio') }}">Cancelar</a></div>
+</form>
+{% endblock %}

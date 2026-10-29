@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}Cadastro de Colaborador{% endblock %}
+{% block conteudo %}
+<section class="titulo-pagina"><h1>Cadastro de Colaborador</h1><p>Cadastre o colaborador que poderá receber equipamentos emprestados.</p></section>
+<form class="formulario" method="post">
+<div class="grade-formulario">
+<div class="campo campo-completo"><label for="nome">Nome completo <span class="obrigatorio">*</span></label><input type="text" id="nome" name="nome" placeholder="Exemplo: João da Silva" value="{{ dados.get('nome','') }}" required></div>
+<div class="campo"><label for="setor">Setor <span class="obrigatorio">*</span></label><select id="setor" name="setor" required><option value="">Selecione</option>{% for item in ['Administrativo','Comercial','Contabilidade','Financeiro','Recursos Humanos','Tecnologia da Informação'] %}<option value="{{ item }}" {% if dados.get('setor')==item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></div>
+<div class="campo"><label for="cargo">Cargo <span class="obrigatorio">*</span></label><input type="text" id="cargo" name="cargo" placeholder="Exemplo: Analista Administrativo" value="{{ dados.get('cargo','') }}" required></div>
+</div>
+<div class="grupo-botoes"><button class="botao" type="submit">Salvar colaborador</button><button class="botao botao-amarelo" type="reset">Limpar</button><a class="botao botao-vermelho" href="{{ url_for('inicio') }}">Cancelar</a></div>
+</form>
+{% endblock %}
